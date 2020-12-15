@@ -17,5 +17,8 @@ const authApi = {
     async reset(email: string): Promise<any> {
         return http.post('auth/reset', email);
     },
+    async logout(): Promise<any> {
+        return http.post('auth/logout');
+    }
 };
 export default authApi;
