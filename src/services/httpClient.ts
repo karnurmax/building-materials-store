@@ -1,8 +1,12 @@
-const baseUrl = 'https://bms-server.oqy.kz/api';
+const baseUrl = () => {
+    return location.origin.indexOf('localhost') > -1
+        ? 'http://localhost:8001/api'
+        : 'https://bms-server.oqy.kz/api';
+}
 
 const http = {
     async get(url: string): Promise<any> {
-        return fetch(`${baseUrl}/${url}`)
+        return fetch(`${baseUrl()}/${url}`)
             .then((response) => {
                 return response.json();
             })
@@ -12,7 +16,7 @@ const http = {
             });
     },
     async post(url: string, data: any = null): Promise<any> {
-        return fetch(`${baseUrl}/${url}`, {
+        return fetch(`${baseUrl()}/${url}`, {
             method: 'POST',
             headers: {
                 Accept: 'application/json',
@@ -33,7 +37,7 @@ const http = {
             });
     },
     async put(url: string, data: any = null): Promise<any> {
-        return fetch(`${baseUrl}/${url}`, {
+        return fetch(`${baseUrl()}/${url}`, {
             method: 'PUT',
             headers: {
                 Accept: 'application/json',
@@ -52,7 +56,7 @@ const http = {
             });
     },
     async delete(url: string): Promise<any> {
-        return fetch(`${baseUrl}/${url}`, {
+        return fetch(`${baseUrl()}/${url}`, {
             method: 'DELETE',
             headers: {
                 Accept: 'application/json',
